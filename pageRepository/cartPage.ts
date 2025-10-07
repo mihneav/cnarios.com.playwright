@@ -50,13 +50,13 @@ export class CartPage {
     },
     quantity: number
   ): Promise<void> {
-    expect(await this.cartItemName(product.name).textContent()).toContain(
+    await expect(this.cartItemName(product.name).textContent()).toContain(
       `${product.name} ($${product.price})`
     );
-    expect(await this.cartItemQuantity(product.name).textContent()).toContain(
+    await expect(this.cartItemQuantity(product.name).textContent()).toContain(
       `${quantity}`
     );
-    expect(await this.cartItemPrice(product.name).textContent()).toContain(
+    await expect(this.cartItemPrice(product.name).textContent()).toContain(
       `$${product.price * quantity}`
     );
   }

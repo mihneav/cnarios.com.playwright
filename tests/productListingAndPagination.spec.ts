@@ -13,7 +13,11 @@ test("PLP_002 - Find specific product and identify its page", async ({
   productListingPage,
 }) => {
   await productListingPage.goto();
-  await productListingPage.findProductAndPage("Uniqlo Ultra Light Down Jacket");
+  expect(
+    await productListingPage.findProductAndPage(
+      "Uniqlo Ultra Light Down Jacket"
+    )
+  ).toBe(true);
 });
 
 test("PLP_003 - Find highest-rated product in each category", async ({
@@ -37,13 +41,13 @@ test("PLP_005 - Validate pagination controls", async ({
 }) => {
   await productListingPage.goto();
   await productListingPage.clickPageNumber(3);
-  expect(await productListingPage.getPageNumber()).toBe("3");
+  await expect(await productListingPage.getPageNumber()).toBe("3");
   await productListingPage.nextButton.click();
-  expect(await productListingPage.getPageNumber()).toBe("4");
+  await expect(await productListingPage.getPageNumber()).toBe("4");
   await productListingPage.previousButton.click();
-  expect(await productListingPage.getPageNumber()).toBe("3");
+  await expect(await productListingPage.getPageNumber()).toBe("3");
   await productListingPage.moveToFirstPage();
-  expect(await productListingPage.getPageNumber()).toBe("1");
+  await expect(await productListingPage.getPageNumber()).toBe("1");
   await productListingPage.moveToLastPage();
-  expect(await productListingPage.getPageNumber()).toBe("5");
+  await expect(await productListingPage.getPageNumber()).toBe("5");
 });

@@ -57,7 +57,7 @@ Password: N/A`;
     await this.page.on("dialog", async (dialog) => {
       let expected = await dialog.message();
 
-      expect(`Dialog message: ` + expected).toBe(alertMessage);
+      await expect(`Dialog message: ` + expected).toBe(alertMessage);
       await dialog.accept();
       // }
     });
@@ -65,15 +65,15 @@ Password: N/A`;
 
   async verifyExternalFillButton(): Promise<void> {
     await this.fillShadowFromButton.click();
-    expect(await this.usernameInput.inputValue()).toBe("tester@example.com");
-    expect(await this.passwordInput.inputValue()).toBe("Password123");
+    await expect(this.usernameInput.inputValue()).toBe("tester@example.com");
+    await expect(this.passwordInput.inputValue()).toBe("Password123");
   }
 
   async verifyExternalResetButton(): Promise<void> {
     await this.verifyExternalFillButton();
     await this.resetShadowFormButton.click();
-    expect(await this.usernameInput.inputValue()).toBe("");
-    expect(await this.passwordInput.inputValue()).toBe("");
+    await expect(this.usernameInput.inputValue()).toBe("");
+    await expect(this.passwordInput.inputValue()).toBe("");
   }
 
   async verifyInputStyles(): Promise<void> {
@@ -101,23 +101,17 @@ Password: N/A`;
   }
 
   async verifyButtonStyles(): Promise<void> {
-    expect(
-      await this.loginButton.evaluate(
-        (e) => getComputedStyle(e).backgroundColor
-      )
+    await expect(
+      this.loginButton.evaluate((e) => getComputedStyle(e).backgroundColor)
     ).toBe("rgb(37, 99, 235)"); // #2563eb
 
     await this.loginButton.click({ delay: 150 });
-    expect(
-      await this.loginButton.evaluate(
-        (e) => getComputedStyle(e).backgroundColor
-      )
+    await expect(
+      this.loginButton.evaluate((e) => getComputedStyle(e).backgroundColor)
     ).toMatch(/^rgb\((29||30),\s(7[8-9]||(80)),\s21[6-7]\)$/); // CI CD flakiness
 
-    expect(
-      await this.loginButton.evaluate(
-        (e) => getComputedStyle(e).transitionProperty
-      )
+    await expect(
+      this.loginButton.evaluate((e) => getComputedStyle(e).transitionProperty)
     ).toBe("background, transform"); // #2563eb
   }
 }

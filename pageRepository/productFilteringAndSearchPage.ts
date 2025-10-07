@@ -59,12 +59,18 @@ export class ProductFilteringAndSearchPage {
         if (filterParams.priceRange) {
           const [min, max] = filterParams.priceRange;
 
-          const price = parseInt(innerText.match(/• ₹(\d+) • ⭐/)[1]);
+          const match = innerText.match(/• ₹(\d+) • ⭐/);
+          if (!match)
+            throw new Error(`Unable to parse price from text: ${innerText}`);
+          const price = parseInt(match[1]);
           expect(price).toBeGreaterThanOrEqual(min);
           expect(price).toBeLessThanOrEqual(max);
         }
         if (filterParams.rating) {
-          const productRating = parseInt(innerText.match(/• ⭐ (\d+)/)[1]);
+          const ratingMatch = innerText.match(/• ⭐ (\d+)/);
+          if (!ratingMatch)
+            throw new Error(`Unable to parse rating from text: ${innerText}`);
+          const productRating = parseInt(ratingMatch[1]);
           expect(productRating).toBeGreaterThanOrEqual(filterParams.rating);
         }
         if (filterParams.stock) {
@@ -82,6 +88,8 @@ export class ProductFilteringAndSearchPage {
   async filterByPriceRange(): Promise<void> {
     const minSlider = await this.priceSlider.first();
     const minBox = await minSlider.boundingBox();
+    if (!minBox)
+      throw new Error("Could not find bounding box for min price slider");
     await this.page.mouse.move(
       minBox.x + minBox.width / 2,
       minBox.y + minBox.height / 2
@@ -91,6 +99,8 @@ export class ProductFilteringAndSearchPage {
     await this.page.mouse.up();
     const maxSlider = await this.priceSlider.last();
     const maxBox = await maxSlider.boundingBox();
+    if (!maxBox)
+      throw new Error("Could not find bounding box for max price slider");
     await this.page.mouse.move(
       maxBox.x + maxBox.width / 2,
       maxBox.y + maxBox.height / 2

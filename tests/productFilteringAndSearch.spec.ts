@@ -55,9 +55,9 @@ test("PF_005	Reset filters", async ({ productFilteringAndSearchPage }) => {
       category: "Electronics",
       priceRange: [5000, 50000],
     });
-  expect(filteredNumberofProducts).toBeLessThan(initialNumberofProducts);
+  await expect(filteredNumberofProducts).toBeLessThan(initialNumberofProducts);
   await productFilteringAndSearchPage.resetFilters();
   const numberofProductsAfterReset =
     await productFilteringAndSearchPage.verifyFilteredProducts({});
-  expect(numberofProductsAfterReset).toBe(initialNumberofProducts);
+  await expect(numberofProductsAfterReset).toBe(initialNumberofProducts);
 });

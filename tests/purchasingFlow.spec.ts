@@ -153,5 +153,6 @@ test("PP_007	Go Home resets flow", async ({
   await addressPage.proceedToPayment();
   await paymentPage.cancelPayment();
   await successPage.verifyCancelledPaymentMessage();
-  // await .verifyHomeResetsFlow();
+  await successPage.goBackToHome();
+  await myShopPage.verifyFlowIsReset();
 });

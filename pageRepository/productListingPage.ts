@@ -26,7 +26,6 @@ export class ProductListingPage {
   }
 
   async getAllProducts(): Promise<void> {
-    // if (await this.previousButton.isDisabled()) {
     const pageNumbers = this.page.locator(".MuiPaginationItem-page").all();
     for (let i = 1; i < (await pageNumbers).length; i++) {
       await this.getAllProductsOnPage();
@@ -105,7 +104,7 @@ export class ProductListingPage {
     return categoryCount;
   }
 
-  async findProductAndPage(productName: string): Promise<number> {
+  async findProductAndPage(productName: string): Promise<boolean> {
     const pageNumbers = await this.page
       .locator(".MuiPaginationItem-page")
       .count();
@@ -113,16 +112,16 @@ export class ProductListingPage {
       for (let j = 0; j < (await this.getProductsCount()); j++) {
         const product = await this.getProduct(j);
         if (product.productName === productName) {
-          console.log(`Found product "${productName}" on page ${i}`);
-          return i;
+          return true;
         }
       }
       if (i < pageNumbers) {
         await this.nextButton.click();
       }
     }
+
     console.log(`Product "${productName}" not found.`);
-    return -1;
+    return false;
   }
 
   async findMaxRatedProductByCategory(): Promise<{ [key: string]: Product }> {
@@ -135,7 +134,6 @@ export class ProductListingPage {
         maxRatedProducts[product.category] = product;
       }
     });
-    console.log("Max rated products by category:", maxRatedProducts);
     return maxRatedProducts;
   }
 
@@ -149,7 +147,6 @@ export class ProductListingPage {
         maxPricedProducts[product.category] = product;
       }
     });
-    console.log("Max rated products by category:", maxPricedProducts);
   }
 
   async clickPageNumber(number: number): Promise<void> {

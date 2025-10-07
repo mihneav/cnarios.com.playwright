@@ -18,7 +18,7 @@ export class SuccessPage {
     product: { name: string; price: number },
     quantity: number
   ): Promise<void> {
-    expect(await this.paymentMessage.textContent()).toContain(
+    await expect(this.paymentMessage.textContent()).toContain(
       `🎉 Order Placed Successfully!Billing Details:${person.firstName} ${
         person.lastName
       }${person.address}Order Summary:${product.name} x ${quantity} = $${
@@ -28,9 +28,13 @@ export class SuccessPage {
   }
 
   async verifyCancelledPaymentMessage(): Promise<void> {
-    expect(await this.paymentFailedMessage.textContent()).toContain(
+    await expect(this.paymentFailedMessage.textContent()).toContain(
       `❌ Payment Failed!`
     );
-    expect(await this.backToHomeButton).toBeVisible();
+    await expect(this.backToHomeButton).toBeVisible();
+  }
+
+  async goBackToHome(): Promise<void> {
+    await this.backToHomeButton.click();
   }
 }
