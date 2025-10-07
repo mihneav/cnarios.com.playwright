@@ -3,7 +3,6 @@ import { LoginFlowPage } from "@pages/loginFlowPage";
 import { ProductListingPage } from "@pages/productListingPage";
 import { ProductFilteringAndSearchPage } from "@pages/productFilteringAndSearchPage";
 import { ShadowDomLoginPage } from "@pages/shadowDomLoginPage";
-import { PurchasingFlowPage } from "@pages/purchasingFlowPage";
 import { MyShopPage } from "@pages/myShopPagePage";
 import { CartPage } from "@pages/cartPage";
 import { AddressPage } from "@pages/addressPage";
@@ -15,7 +14,7 @@ export const test = baseTest.extend<{
   productListingPage: ProductListingPage;
   productFilteringAndSearchPage: ProductFilteringAndSearchPage;
   shadowDomLoginPage: ShadowDomLoginPage;
-  purchasingFlowPage: PurchasingFlowPage;
+
   myShopPage: MyShopPage;
   cartPage: CartPage;
   addressPage: AddressPage;
@@ -33,9 +32,6 @@ export const test = baseTest.extend<{
   },
   shadowDomLoginPage: async ({ page }, use) => {
     await use(new ShadowDomLoginPage(page));
-  },
-  purchasingFlowPage: async ({ page }, use) => {
-    await use(new PurchasingFlowPage(page));
   },
   myShopPage: async ({ page }, use) => {
     await use(new MyShopPage(page));

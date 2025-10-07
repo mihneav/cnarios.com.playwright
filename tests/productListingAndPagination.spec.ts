@@ -13,7 +13,11 @@ test("PLP_002 - Find specific product and identify its page", async ({
   productListingPage,
 }) => {
   await productListingPage.goto();
-  await productListingPage.findProductAndPage("Uniqlo Ultra Light Down Jacket");
+  expect(
+    await productListingPage.findProductAndPage(
+      "Uniqlo Ultra Light Down Jacket"
+    )
+  ).toBe(true);
 });
 
 test("PLP_003 - Find highest-rated product in each category", async ({

@@ -5,6 +5,8 @@ export class MyShopPage {
   private readonly cartButton: Locator;
   private readonly productCard: Locator;
   private readonly addToCartButton: (number: number) => Locator;
+  private readonly sectionNumberCircle: Locator;
+  private readonly cartCounter: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -17,6 +19,8 @@ export class MyShopPage {
         .getByRole("button", { name: "Add to Cart" });
     };
     this.cartButton = page.locator("button.MuiIconButton-colorPrimary");
+    this.sectionNumberCircle = page.locator(".MuiStepIcon-text");
+    this.cartCounter = page.locator("MuiBadge-anchorOriginTopRightRectangular");
   }
   async goto(): Promise<void> {
     await this.page.goto("/challenges/product-purchasing");
@@ -38,5 +42,11 @@ export class MyShopPage {
 
   async openCart(): Promise<void> {
     await this.cartButton.click();
+  }
+
+  async verifyFlowIsReset(): Promise<void> {
+    expect(await this.productCard.count()).toBe(5);
+    expect(await this.sectionNumberCircle.first()).toHaveText("1");
+    expect(await this.cartCounter).not.toBeVisible();
   }
 }
