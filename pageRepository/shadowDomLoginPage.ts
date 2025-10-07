@@ -112,7 +112,7 @@ Password: N/A`;
       await this.loginButton.evaluate(
         (e) => getComputedStyle(e).backgroundColor
       )
-    ).toMatch(/^rgb\((29||30),(\s7[8-9]||(80)),\s21[6-7]\)$/); // CI CD flakiness
+    ).toMatch(/^rgb\((29||30),\s(7[8-9]||(80)),\s21[6-7]\)$/); // CI CD flakiness
 
     expect(
       await this.loginButton.evaluate(
