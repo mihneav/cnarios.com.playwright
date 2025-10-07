@@ -31,7 +31,7 @@ export class SuccessPage {
     expect(await this.paymentFailedMessage.textContent()).toContain(
       `❌ Payment Failed!`
     );
-    expect(await this.backToHomeButton).toBeVisible({ timeout: 100 });
+    expect(await this.backToHomeButton).toBeVisible();
   }
 
   async goBackToHome(): Promise<void> {
