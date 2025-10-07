@@ -95,7 +95,6 @@ export class ProductListingPage {
 
   async countProductsByCategory(): Promise<{ [key: string]: number }> {
     let categoryCount: { [key: string]: number } = {};
-    console.log(this.products.length);
     this.products.forEach((product) => {
       if (categoryCount[product.category]) {
         categoryCount[product.category]++;
@@ -103,7 +102,6 @@ export class ProductListingPage {
         categoryCount[product.category] = 1;
       }
     });
-    console.log("Product count by category:", categoryCount);
     return categoryCount;
   }
 
@@ -159,7 +157,6 @@ export class ProductListingPage {
   }
 
   async getPageNumber(): Promise<string | null> {
-    console.log(await this.currentPageNumberbutton.textContent());
     return await this.currentPageNumberbutton.textContent();
   }
 

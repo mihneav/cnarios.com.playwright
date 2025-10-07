@@ -21,7 +21,7 @@ export class LoginFlowPage {
     this.logoutButton = page.getByRole("button", { name: "Logout" });
   }
 
-  async goto() {
+  async goto(): Promise<void> {
     await this.page.goto("/challenges/login-flow#challenge");
   }
 }
