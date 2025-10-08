@@ -50,15 +50,15 @@ export class CartPage {
     },
     quantity: number
   ): Promise<void> {
-    await expect(this.cartItemName(product.name).textContent()).toContain(
+    await expect(await this.cartItemName(product.name).textContent()).toContain(
       `${product.name} ($${product.price})`
     );
-    await expect(this.cartItemQuantity(product.name).textContent()).toContain(
-      `${quantity}`
-    );
-    await expect(this.cartItemPrice(product.name).textContent()).toContain(
-      `$${product.price * quantity}`
-    );
+    await expect(
+      await this.cartItemQuantity(product.name).textContent()
+    ).toContain(`${quantity}`);
+    await expect(
+      await this.cartItemPrice(product.name).textContent()
+    ).toContain(`$${product.price * quantity}`);
   }
 
   async increaseItemQuantity(name: string, times: number): Promise<void> {
@@ -74,8 +74,8 @@ export class CartPage {
   }
 
   async verifyCartIsEmpty(): Promise<void> {
-    await expect(this.cartTotal).toHaveText("Total: $0");
-    await expect(this.proceedToAddressButton).toBeDisabled();
+    await expect(await this.cartTotal).toHaveText("Total: $0");
+    await expect(await this.proceedToAddressButton).toBeDisabled();
   }
 
   async proceedToAddress(): Promise<void> {

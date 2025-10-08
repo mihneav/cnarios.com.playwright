@@ -45,8 +45,8 @@ export class MyShopPage {
   }
 
   async verifyFlowIsReset(): Promise<void> {
-    await expect(this.productCard.count()).toBe(5);
-    await expect(this.sectionNumberCircle.first()).toHaveText("1");
-    await expect(this.cartCounter).not.toBeVisible();
+    await expect(await this.productCard.count()).toBe(5);
+    await expect(await this.sectionNumberCircle.first()).toHaveText("1");
+    await expect(await this.cartCounter).not.toBeVisible();
   }
 }

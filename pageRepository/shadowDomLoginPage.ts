@@ -65,15 +65,17 @@ Password: N/A`;
 
   async verifyExternalFillButton(): Promise<void> {
     await this.fillShadowFromButton.click();
-    await expect(this.usernameInput.inputValue()).toBe("tester@example.com");
-    await expect(this.passwordInput.inputValue()).toBe("Password123");
+    await expect(await this.usernameInput.inputValue()).toBe(
+      "tester@example.com"
+    );
+    await expect(await this.passwordInput.inputValue()).toBe("Password123");
   }
 
   async verifyExternalResetButton(): Promise<void> {
     await this.verifyExternalFillButton();
     await this.resetShadowFormButton.click();
-    await expect(this.usernameInput.inputValue()).toBe("");
-    await expect(this.passwordInput.inputValue()).toBe("");
+    await expect(await this.usernameInput.inputValue()).toBe("");
+    await expect(await this.passwordInput.inputValue()).toBe("");
   }
 
   async verifyInputStyles(): Promise<void> {
@@ -89,11 +91,11 @@ Password: N/A`;
       await element.click({ delay: 150 });
       const afterStyles = await getStyles(element);
 
-      expect(beforeStyles.borderColor).not.toBe(afterStyles.borderColor);
-      expect(beforeStyles.border).not.toBe(afterStyles.border);
-      expect(beforeStyles.padding).toBe(afterStyles.padding);
-      expect(beforeStyles.borderRadius).toBe(afterStyles.borderRadius);
-      expect(beforeStyles.borderRadius).toBe("10px");
+      await expect(beforeStyles.borderColor).not.toBe(afterStyles.borderColor);
+      await expect(beforeStyles.border).not.toBe(afterStyles.border);
+      await expect(beforeStyles.padding).toBe(afterStyles.padding);
+      await expect(beforeStyles.borderRadius).toBe(afterStyles.borderRadius);
+      await expect(beforeStyles.borderRadius).toBe("10px");
     }
 
     await verifyInputStyles(this.usernameInput);
@@ -102,16 +104,22 @@ Password: N/A`;
 
   async verifyButtonStyles(): Promise<void> {
     await expect(
-      this.loginButton.evaluate((e) => getComputedStyle(e).backgroundColor)
+      await this.loginButton.evaluate(
+        (e) => getComputedStyle(e).backgroundColor
+      )
     ).toBe("rgb(37, 99, 235)"); // #2563eb
 
     await this.loginButton.click({ delay: 150 });
     await expect(
-      this.loginButton.evaluate((e) => getComputedStyle(e).backgroundColor)
+      await this.loginButton.evaluate(
+        (e) => getComputedStyle(e).backgroundColor
+      )
     ).toMatch(/^rgb\((29||30),\s(7[8-9]||(80)),\s21[6-7]\)$/); // CI CD flakiness
 
     await expect(
-      this.loginButton.evaluate((e) => getComputedStyle(e).transitionProperty)
+      await this.loginButton.evaluate(
+        (e) => getComputedStyle(e).transitionProperty
+      )
     ).toBe("background, transform"); // #2563eb
   }
 }
