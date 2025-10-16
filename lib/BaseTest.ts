@@ -8,18 +8,19 @@ import { CartPage } from "@pages/cartPage";
 import { AddressPage } from "@pages/addressPage";
 import { PaymentPage } from "@pages/paymentPage";
 import { SuccessPage } from "@pages/successPage";
+import { JobApplicationPage } from "@pages/jobApplicationPage";
 
 export const test = baseTest.extend<{
   loginFlowPage: LoginFlowPage;
   productListingPage: ProductListingPage;
   productFilteringAndSearchPage: ProductFilteringAndSearchPage;
   shadowDomLoginPage: ShadowDomLoginPage;
-
   myShopPage: MyShopPage;
   cartPage: CartPage;
   addressPage: AddressPage;
   paymentPage: PaymentPage;
   successPage: SuccessPage;
+  jobApplicationPage: JobApplicationPage;
 }>({
   loginFlowPage: async ({ page }, use) => {
     await use(new LoginFlowPage(page));
@@ -47,5 +48,8 @@ export const test = baseTest.extend<{
   },
   successPage: async ({ page }, use) => {
     await use(new SuccessPage(page));
+  },
+  jobApplicationPage: async ({ page }, use) => {
+    await use(new JobApplicationPage(page));
   },
 });
