@@ -1,5 +1,5 @@
 import { test } from "@lib/BaseTest";
-const fs = require("fs");
+import { FileUtils } from "../utils/FileUtils";
 
 test("JAF_001	Submit form with valid data", async ({ jobApplicationPage }) => {
   await jobApplicationPage.goto();
@@ -68,11 +68,5 @@ test("JAF_008	Submit without accepting terms", async ({
 });
 
 test.afterAll(async () => {
-  const downloadPath = "./downloads/";
-  if (fs.existsSync(downloadPath)) {
-    const files = fs.readdirSync(downloadPath);
-    for (const file of files) {
-      fs.unlinkSync(`${downloadPath}${file}`);
-    }
-  }
+  await FileUtils.deleteFilesInDownloadsFolder();
 });
