@@ -19,37 +19,6 @@ export class Product {
     this.stock = stock;
   }
 
-  addProduct(
-    productName: string,
-    category: string,
-    price: number,
-    rating: number
-  ) {
-    const newProduct = new Product(productName, category, price, rating);
-    // Code to add newProduct to database or list
-    return newProduct;
-  }
-
-  async getName() {
-    return this.productName;
-  }
-
-  async getCategory() {
-    return this.category;
-  }
-
-  async getPrice() {
-    return this.price;
-  }
-
-  async getRating() {
-    return this.rating;
-  }
-
-  async getStock() {
-    return this.stock;
-  }
-
   async getProduct(productName: string) {
     if (productName === this.productName) {
       return {

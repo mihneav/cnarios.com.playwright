@@ -10,6 +10,7 @@ import { PaymentPage } from "@pages/paymentPage";
 import { SuccessPage } from "@pages/successPage";
 import { JobApplicationPage } from "@pages/jobApplicationPage";
 import { ApplicationPreviewModal } from "@pages/applicationPreviewModal";
+import { SocialMediaFeedPage } from "@pages/socialMediaFeedPage";
 
 export const test = baseTest.extend<{
   loginFlowPage: LoginFlowPage;
@@ -23,6 +24,7 @@ export const test = baseTest.extend<{
   successPage: SuccessPage;
   jobApplicationPage: JobApplicationPage;
   applicationPreviewModal: ApplicationPreviewModal;
+  socialMediaFeedPage: SocialMediaFeedPage;
 }>({
   loginFlowPage: async ({ page }, use) => {
     await use(new LoginFlowPage(page));
@@ -54,7 +56,10 @@ export const test = baseTest.extend<{
   jobApplicationPage: async ({ page }, use) => {
     await use(new JobApplicationPage(page));
   },
-  applicationPreviewModal: async ({ page, jobApplicationPage }, use) => {
+  applicationPreviewModal: async ({ page }, use) => {
     await use(new ApplicationPreviewModal(page));
+  },
+  socialMediaFeedPage: async ({ page }, use) => {
+    await use(new SocialMediaFeedPage(page));
   },
 });

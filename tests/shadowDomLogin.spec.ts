@@ -5,10 +5,7 @@ test("SDL_001	Enter username and password and click login", async ({
 }) => {
   await shadowDomLoginPage.goto();
   await shadowDomLoginPage.verifyJsAlert("SDL_001");
-  let message = await shadowDomLoginPage.login(
-    "tester@example.com",
-    "Password123"
-  );
+  await shadowDomLoginPage.login("tester@example.com", "Password123");
 });
 
 test("SDL_002	Click login with empty inputs", async ({ shadowDomLoginPage }) => {
