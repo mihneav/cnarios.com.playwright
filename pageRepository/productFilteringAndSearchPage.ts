@@ -1,5 +1,4 @@
 import { type Locator, type Page, expect } from "@playwright/test";
-import { Product } from "@utils/ProductClass";
 
 export class ProductFilteringAndSearchPage {
   readonly page: Page;
